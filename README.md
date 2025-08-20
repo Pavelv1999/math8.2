@@ -1,1 +1,1 @@
-# math8.2
+https://pavelv1999.github.io/math8.2/
