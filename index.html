@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отрицательная степень</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        h2 {
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 1.4em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
+        }
+        .theory {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(56, 178, 172, 0.2);
+            box-shadow: 0 8px 25px rgba(56, 178, 172, 0.1);
+        }
+        .formula {
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .formula::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .example {
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border-left: 5px solid #10b981;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .example:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+        }
+        .important {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #f59e0b;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.1);
+            position: relative;
+        }
+        .important::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 1.5em;
+            background: #fffbeb;
+            padding: 0 10px;
+        }
+        .homework {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            padding: 30px;
+            border-radius: 18px;
+            border: 2px solid #3b82f6;
+            margin-top: 40px;
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+            position: relative;
+        }
+        .homework::before {
+            content: '🏠';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            font-size: 2em;
+            background: #eff6ff;
+            padding: 0 15px;
+        }
+        .problem {
+            margin: 20px 0;
+            font-size: 1.1em;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: 500;
+        }
+        .fraction-top {
+            border-bottom: 2px solid #374151;
+            padding: 2px 8px;
+        }
+        .fraction-bottom {
+            padding: 2px 8px;
+        }
+        sup {
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        .step {
+            margin: 15px 0;
+            padding: 18px;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-left: 4px solid #06b6d4;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+            transition: all 0.2s ease;
+        }
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.15);
+        }
+        strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+            color: #374151;
+        }
+        /* Анимация появления элементов */
+        .container > * {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .container > *:nth-child(1) { animation-delay: 0.1s; }
+        .container > *:nth-child(2) { animation-delay: 0.2s; }
+        .container > *:nth-child(3) { animation-delay: 0.3s; }
+        .container > *:nth-child(4) { animation-delay: 0.4s; }
+        .container > *:nth-child(5) { animation-delay: 0.5s; }
+        .container > *:nth-child(6) { animation-delay: 0.6s; }
+        .container > *:nth-child(7) { animation-delay: 0.7s; }
+        .container > *:nth-child(8) { animation-delay: 0.8s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Улучшение мобильной версии */
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .container { padding: 25px; }
+            h1 { font-size: 2em; }
+            .formula { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Отрицательная степень</h1>
+
+        <div class="theory">
+            <h2>📚 Основное правило</h2>
+            <p><strong>При отрицательной степени число превращается в дробь:</strong></p>
+            
+            <div class="formula">
+                5<sup>-2</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5<sup>2</sup></div>
+                </span> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">25</div>
+                </span>
+            </div>
+
+            <div class="important">
+                <strong>📌 Запомни:</strong>
+                <ul>
+                    <li>При <strong>минусовой степени</strong> число заносим в знаменатель (вниз дроби)</li>
+                    <li>Минус в степени исчезает!</li>
+                    <li>Это правило работает <strong>в обе стороны</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory">
+            <h2>🔄 Обратное правило</h2>
+            <p>Из дроби можем сделать число с отрицательной степенью:</p>
+            
+            <div class="formula">
+                <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">3<sup>4</sup></div>
+                </span> = 3<sup>-4</sup>
+            </div>
+        </div>
+
+        <div class="theory">
+            <h2>⚡ Важно помнить</h2>
+            <div class="important">
+                <strong>Нулевая степень любого числа всегда равна 1:</strong>
+                <div class="formula">a<sup>0</sup> = 1</div>
+                <p>Например: 5<sup>0</sup> = 1, 100<sup>0</sup> = 1, (-7)<sup>0</sup> = 1</p>
+            </div>
+        </div>
+
+        <h2>✨ Примеры решений</h2>
+
+        <div class="example">
+            <strong>Пример 1:</strong> <span class="fraction">
+                <div class="fraction-top">1</div>
+                <div class="fraction-bottom">125</div>
+            </span> · 5<sup>2</sup> = ?
+            <div class="step">
+                <strong>Решение:</strong><br>
+                125 = 5 · 5 · 5 = 5<sup>3</sup>, заменяем 125 на 5<sup>3</sup><br>
+                5<sup>3</sup> в знаменателе по правилу это 5<sup>-3</sup> в числителе<br>
+                Наглядно: <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5<sup>3</sup> ↑</div>
+                </span> → <span class="fraction">
+                    <div class="fraction-top">5<sup>-3</sup></div>
+                    <div class="fraction-bottom">1</div>
+                </span> = 5<sup>-3</sup> (перекидываем наверх, меняя знак степени)<br><br>
+                <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">125</div>
+                </span> · 5<sup>2</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5<sup>3</sup></div>
+                </span> · 5<sup>2</sup> = 5<sup>-3</sup> · 5<sup>2</sup> = 5<sup>-3+2</sup> = 5<sup>-1</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5</div>
+                </span>
+            </div>
+        </div>
+
+        <div class="example">
+            <strong>Пример 2:</strong> <span class="fraction">
+                <div class="fraction-top">1</div>
+                <div class="fraction-bottom">5<sup>3</sup></div>
+            </span> = 5<sup>-3</sup>
+            <div class="step">
+                <strong>Пояснение:</strong> Дробь вида <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">a<sup>n</sup></div>
+                </span> записывается как a<sup>-n</sup>
+            </div>
+        </div>
+
+        <div class="example">
+            <strong>Пример 3:</strong> 2<sup>-3</sup> = ?
+            <div class="step">
+                <strong>Решение:</strong> 2<sup>-3</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2<sup>3</sup></div>
+                </span> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">8</div>
+                </span>
+            </div>
+        </div>
+
+        <h2>📝 Подробное решение задания</h2>
+
+        <div class="example">
+            <strong>Задание:</strong> Найдите значение выражения:<br>
+            <strong>а)</strong> (<span class="fraction">
+                <div class="fraction-top">1</div>
+                <div class="fraction-bottom">27</div>
+            </span>) · 3<sup>4</sup>, <strong>б)</strong> 5<sup>-3</sup> · (<span class="fraction">
+                <div class="fraction-top">1</div>
+                <div class="fraction-bottom">25</div>
+            </span>), <strong>в)</strong> ((<span class="fraction">
+                <div class="fraction-top">1</div>
+                <div class="fraction-bottom">7</div>
+            </span>)<sup>-1</sup>)<sup>-2</sup>
+            
+            <div class="step">
+                <strong>Решение а):</strong><br>
+                27 = 3 · 3 · 3 = 3<sup>3</sup><br>
+                <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">27</div>
+                </span> · 3<sup>4</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">3<sup>3</sup></div>
+                </span> · 3<sup>4</sup> = 3<sup>-3</sup> · 3<sup>4</sup> = 3<sup>-3+4</sup> = 3<sup>1</sup> = 3
+            </div>
+            
+            <div class="step">
+                <strong>Решение б):</strong><br>
+                25 = 5 · 5 = 5<sup>2</sup><br>
+                5<sup>-3</sup> · <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">25</div>
+                </span> = 5<sup>-3</sup> · <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5<sup>2</sup></div>
+                </span> = 5<sup>-3</sup> · 5<sup>-2</sup> = 5<sup>-3-2</sup> = 5<sup>-5</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">5<sup>5</sup></div>
+                </span> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">3125</div>
+                </span>
+            </div>
+            
+            <div class="step">
+                <strong>Решение в):</strong><br>
+                (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">7</div>
+                </span>)<sup>-1</sup> = 7<sup>1</sup> = 7<br>
+                ((<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">7</div>
+                </span>)<sup>-1</sup>)<sup>-2</sup> = 7<sup>-2</sup> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">7<sup>2</sup></div>
+                </span> = <span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">49</div>
+                </span>
+            </div>
+        </div>
+
+        <div class="homework">
+            <h2>🏠 Домашнее задание</h2>
+            
+            <div class="problem">
+                <strong>Задание 1.</strong> Найдите значение выражения:<br><br>
+                <strong>б)</strong> 5<sup>-3</sup> · (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">25</div>
+                </span>)<br><br>
+                <strong>в)</strong> ((<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">7</div>
+                </span>)<sup>-1</sup>)<sup>-2</sup>
+            </div>
+
+            <div class="problem">
+                <strong>Задание 2.</strong> Найдите значение выражения:<br><br>
+                <strong>б)</strong> (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">100</div>
+                </span>) : 10<sup>-3</sup><br><br>
+                <strong>в)</strong> ((<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">9</div>
+                </span>)<sup>-1</sup>)<sup>2</sup>
+            </div>
+
+            <div class="problem">
+                <strong>Задание 3.</strong> Замените степень с целым отрицательным показателем дробью:<br><br>
+                <strong>1)</strong> 6<sup>-2</sup>, 6<sup>-3</sup>, (-6)<sup>-2</sup>, (-6)<sup>-3</sup>, -6<sup>-2</sup>, -(-6)<sup>-2</sup><br><br>
+                <strong>2)</strong> (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-2</sup>, (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-3</sup>, (-<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-2</sup>, (-<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-3</sup>, -(<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-2</sup>, -(-<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">2</div>
+                </span>)<sup>-2</sup>
+            </div>
+
+            <div class="problem">
+                <strong>Задание 4.</strong> Найдите значение выражения:<br><br>
+                <strong>а)</strong> (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">16</div>
+                </span>) · 2<sup>4</sup>, <strong>б)</strong> (<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">100</div>
+                </span>) : 10<sup>-3</sup>, <strong>в)</strong> ((<span class="fraction">
+                    <div class="fraction-top">1</div>
+                    <div class="fraction-bottom">9</div>
+                </span>)<sup>-1</sup>)<sup>2</sup>
+            </div>
+
+            <div class="important" style="margin-top: 20px;">
+                <strong>💡 Подсказка:</strong>
+                <ul>
+                    <li>Сначала преобразуй отрицательные степени в дроби</li>
+                    <li>Помни: (<span class="fraction">
+                        <div class="fraction-top">1</div>
+                        <div class="fraction-bottom">a</div>
+                    </span>)<sup>-1</sup> = a</li>
+                    <li>Не забывай про правило степеней: (a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></li>
+                    <li>Внимательно следи за знаками: (-a)<sup>n</sup> ≠ -a<sup>n</sup></li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #7f8c8d;">
+            <p>Удачи в изучении математики! 📐✨</p>
+        </div>
+    </div>
+</body>
+</html>
